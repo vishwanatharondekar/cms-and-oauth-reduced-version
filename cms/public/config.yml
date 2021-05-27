@@ -1,13 +1,13 @@
 backend:
   name: github
   # Replace this with the Github repo you want to make change
-  repo: github-username/target-github-repo
+  repo: vishwanatharondekar/test
   # This site_domain and base_url are sudo domains
   # Replace site_domain with targetDomain pulumi stack configuration inside cms/infrastructure folder
   # Replace base_url with targetDomain pulumi stack configuration inside cms-oauth/infrastructure folder
   site_domain: https://some-cms-domain.com
-  base_url: https://some-oauth-domain.com
-  
+  base_url: http://localhost:3000
+
 publish_mode: editorial_workflow
 
 # Check https://www.netlifycms.org/docs/configuration-options/#media-and-public-folders for setting them
@@ -16,3 +16,15 @@ public_folder: "some-public-folder"
 
 # Check https://www.netlifycms.org/docs/configuration-options/#configuration-file for configure your CMS
 collections:
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "BlogPost" # Used in the UI
+    folder: "posts" # The path to the folder where the markdown files are stored
+    create: true # Allow users to create new markdown files.
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for front matter. You will need to modify fields according to your project.
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Download", name: "download", widget: "string" }
+      - { label: "Featured Image", name: "thumbnail", widget: "image" }
+      - { label: "Author", name: "author", widget: "string", default: "Admin" }
+      - { label: "Body", name: "body", widget: "markdown" }
